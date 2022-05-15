@@ -1,3 +1,20 @@
+<?php
+include '../koneksi.php';
+
+if (isset($_POST['submit'])) {
+    // var_dump($_POST);
+    // die;
+    $kd_semester = $_POST['kd_semester'];
+    $semester = $_POST['semester'];
+    mysqli_query($koneksi, "insert into tbl_semester values('$kd_semester','$semester');");
+    if (mysqli_affected_rows($koneksi) > 0) {
+        header("location:semester_data.php");
+    } else {
+        echo mysqli_error($koneksi);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,24 +27,24 @@
 
 <body>
     <h1>Tambah Semester</h1>
-    <a href="matkul_data.php"> &lt; &lt; Back</a>
+    <a href="semester_data.php"> &lt; &lt; Back</a>
     <br>
     <form action="" method="post">
         <table>
             <tr>
                 <td>
-                    <label for="">Kode</label>
+                    <label for="kd_semester">Kode</label>
                 </td>
                 <td>
-                    <input type="text">
+                    <input type="text" name="kd_semester">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="">Semester</label>
+                    <label for="semester">Semester</label>
                 </td>
                 <td>
-                    <input type="text">
+                    <input type="text" name="semester">
                 </td>
             </tr>
             <tr>
@@ -35,7 +52,7 @@
                     <label for=""></label>
                 </td>
                 <td>
-                    <button type="submit">SIMPAN</button>
+                    <button type="submit" name="submit">SIMPAN</button>
                     <button type="reset">UNDO</button>
                 </td>
             </tr>
