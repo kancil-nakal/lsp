@@ -1,21 +1,26 @@
 <?php
 include 'koneksi.php';
+session_start();
+if (isset($_SESSION['login'])) {
+    header("location:index.php");
+}
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+if (isset($_POST['username'])) {
 
-$query = mysqli_query($koneksi, "select * from tbl_user where username='$username' and password='$password'");
-$cek = mysqli_num_rows($query);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-// if ($cek > 0) {
-//     session_start();
-//     $_SESSION['username'] = $username;
-//     $_SESSION['status'] = 'login';
-//     header("location:index.php");
-// } else {
-//     header("location:login.php");
-// } 
+    $query = mysqli_query($koneksi, "select * from tbl_user where username='$username' and password='$password'");
+    $cek = mysqli_num_rows($query);
+    if ($cek > 0) {
 
+        $_SESSION['username'] = $username;
+        $_SESSION['login'] = true;
+        header("location:index.php");
+    } else {
+        header("location:login.php");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +35,7 @@ $cek = mysqli_num_rows($query);
 
 <body>
     <h1>Login</h1>
-    <form action="#" method="post">
+    <form action="" method="post">
         <table>
             <tr>
                 <td>Username</td>
@@ -44,7 +49,6 @@ $cek = mysqli_num_rows($query);
             </tr>
             <tr>
                 <td><button type="submit">Login</button></td>
-
             </tr>
         </table>
     </form>

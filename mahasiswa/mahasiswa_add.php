@@ -1,12 +1,20 @@
 <?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
 include '../koneksi.php';
 if (isset($_POST['submit'])) {
     $nim = $_POST['nim'];
     $nama = $_POST['nama'];
     $jurusan = $_POST['jurusan'];
     $alamat = $_POST['alamat'];
-    mysqli_query($koneksi, "insert into tbl_mahasiswa values('$nim','$nama','$jurusan', $alamat');");
-    header("location:mahasiswa_data.php");
+    mysqli_query($koneksi, "insert into tbl_mahasiswa values('$nim','$nama','$jurusan', '$alamat');");
+    if (mysqli_affected_rows($koneksi) > 0) {
+        header("location:mahasiswa_data.php");
+    } else {
+        echo mysqli_error($koneksi);
+    }
 }
 ?>
 <!DOCTYPE html>

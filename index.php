@@ -1,3 +1,9 @@
+<?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +28,7 @@
     <a href="krs/krs_data.php"><button>KRS</button></a> ||
     <a href="jadwal/jadwal_data.php"><button>JADWAL MENGAJAR</button></a>
     <br><br>
-    <a href="">logout</a>
+    <a href="logout.php">logout</a>
 </body>
 
 </html>

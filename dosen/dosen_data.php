@@ -1,5 +1,9 @@
 <?php
 include '../koneksi.php';
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
 $query = "select * from tbl_dosen;";
 $data = mysqli_query($koneksi, $query);
 ?>

@@ -1,4 +1,8 @@
 <?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
 include '../koneksi.php';
 
 $id_krs = $_GET['id'];
@@ -65,10 +69,10 @@ if (isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label for="semester">Semester</label>
+                        <label for="kd_semester">Semester</label>
                     </td>
                     <td>
-                        <select name="semester" id="semester" style="width: 400px;">
+                        <select name="kd_semester" id="kd_semester" style="width: 400px;">
                             <?php while ($s = mysqli_fetch_assoc($semester)) : ?>
                                 <option value="<?= $s['kd_semester']; ?>" <?= $k['kd_semester'] == $s['kd_semester'] ? 'selected' : ' '; ?>><?= $s['semester'] ?></option>
                             <?php endwhile ?>

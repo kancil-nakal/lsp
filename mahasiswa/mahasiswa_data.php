@@ -1,4 +1,8 @@
 <?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
 include '../koneksi.php';
 $data = mysqli_query($koneksi, "select * from tbl_mahasiswa;")
 

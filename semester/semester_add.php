@@ -1,4 +1,8 @@
 <?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
 include '../koneksi.php';
 
 if (isset($_POST['submit'])) {
@@ -57,13 +61,6 @@ if (isset($_POST['submit'])) {
                 </td>
             </tr>
         </table>
-        <!-- <label for="">Kode</label>
-        <input type="text"><br>
-        <label for="">Nama Dosen</label>
-        <input type="text"><br>
-        <label for="">Alamat Dosen</label>
-        <input type="text"><br> -->
-        <!-- <button type="submit">SIMPAN</button> -->
     </form>
 </body>
 

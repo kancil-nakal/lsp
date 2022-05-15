@@ -1,5 +1,10 @@
 <?php
 include '../koneksi.php';
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
+
 if (isset($_POST['submit'])) {
     $kd_dosen = $_POST['kd_dosen'];
     $nama = $_POST['nama'];

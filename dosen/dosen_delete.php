@@ -1,5 +1,9 @@
 <?php
 include "../koneksi.php";
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
 
 $kd_dosen = $_GET['kd_dosen'];
 

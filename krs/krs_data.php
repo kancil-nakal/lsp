@@ -1,4 +1,9 @@
 <?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
+
 include '../koneksi.php';
 $query = "select *,tm.nama as nama_mahasiswa,td.nama as nama_dosen,tm2.nama as matakuliah,tk.id as id_krs FROM tbl_krs tk, tbl_jadwal tj ,tbl_mahasiswa tm ,tbl_semester ts ,tbl_dosen td ,tbl_matkul tm2 WHERE tj.kd_dosen =td.kd_dosen and tj.kd_matkul =tm2.kd_matkul and tk.id_jadwal =tj.id and tk.nim =tm.nim and tk.kd_semester =ts.kd_semester ;";
 $data = mysqli_query($koneksi, $query);

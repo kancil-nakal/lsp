@@ -1,4 +1,8 @@
 <?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
 include '../koneksi.php';
 
 $jadwal = mysqli_query($koneksi, "select *,td.nama as nama_dosen,tm.nama as matakuliah from tbl_jadwal tj inner join tbl_dosen td on tj.kd_dosen =td.kd_dosen INNER JOIN tbl_matkul tm on tj.kd_matkul =tm.kd_matkul ;");
@@ -9,7 +13,7 @@ if (isset($_POST['submit'])) {
     $id_jadwal = $_POST['id_jadwal'];
     $nim = $_POST['nim'];
     $kd_semester = $_POST['kd_semester'];
-    mysqli_query($koneksi, "insert into tbl_dosen values('$id_jadwal','$nim','$kd_semester');");
+    mysqli_query($koneksi, "insert into tbl_krs(id_jadwal,nim,kd_semester) values('$id_jadwal','$nim','$kd_semester');");
     if (mysqli_affected_rows($koneksi) > 0) {
         header("location:krs_data.php");
     } else {
@@ -62,10 +66,10 @@ if (isset($_POST['submit'])) {
             </tr>
             <tr>
                 <td>
-                    <label for="semester">Semester</label>
+                    <label for="kd_semester">Semester</label>
                 </td>
                 <td>
-                    <select name="semester" id="semester" style="width: 400px;">
+                    <select name="kd_semester" id="kd_semester" style="width: 400px;">
                         <option value="">--Pilih--</option>
                         <?php while ($s = mysqli_fetch_assoc($semester)) : ?>
                             <option value="<?= $s['kd_semester']; ?>"><?= $s['semester'] ?></option>

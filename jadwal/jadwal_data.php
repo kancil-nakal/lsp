@@ -1,4 +1,9 @@
 <?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
+
 include '../koneksi.php';
 $query = "select *,td.nama as nama_dosen,tm.nama as matakuliah from tbl_jadwal tj inner join tbl_dosen td on tj.kd_dosen =td.kd_dosen INNER JOIN tbl_matkul tm on tj.kd_matkul =tm.kd_matkul ;";
 

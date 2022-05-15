@@ -1,4 +1,9 @@
 <?php
+session_start();
+if ($_SESSION['login'] == false) {
+    header("Location:../login.php");
+}
+
 include '../koneksi.php';
 $kd_semester = $_GET['kd_semester'];
 $data = mysqli_query($koneksi, "select * from tbl_semester where kd_semester=$kd_semester");
