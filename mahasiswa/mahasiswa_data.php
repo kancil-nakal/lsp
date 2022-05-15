@@ -1,3 +1,8 @@
+<?php
+include '../koneksi.php';
+$data = mysqli_query($koneksi, "select * from tbl_mahasiswa;")
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +26,20 @@
             <th>Alamat</th>
             <th>Opsi</th>
         </tr>
+        <?php $no = 1;
+        while ($d = mysqli_fetch_assoc($data)) : ?>
+            <tr>
+                <td><?= $no++; ?></td>
+                <td><?= $d['nim'] ?></td>
+                <td><?= $d['nama'] ?></td>
+                <td><?= $d['jurusan'] ?></td>
+                <td><?= $d['alamat'] ?></td>
+                <td>
+                    <a href="mahasiswa_edit.php?nim=<?= $d['nim']; ?>">edit</a>
+                    <a href="mahasiswa_delete.php?nim=<?= $d['nim']; ?>" onclick="return confirm('Apakah anda yakin?')">delete</a>
+                </td>
+            </tr>
+        <?php endwhile ?>
     </table>
     <br><br>
     <a href="../index.php">Back to Main Menu</a><br>

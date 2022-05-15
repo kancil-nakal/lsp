@@ -1,3 +1,14 @@
+<?php
+include '../koneksi.php';
+if (isset($_POST['submit'])) {
+    $nim = $_POST['nim'];
+    $nama = $_POST['nama'];
+    $jurusan = $_POST['jurusan'];
+    $alamat = $_POST['alamat'];
+    mysqli_query($koneksi, "insert into tbl_mahasiswa values('$nim','$nama','$jurusan', $alamat');");
+    header("location:mahasiswa_data.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,34 +27,34 @@
         <table>
             <tr>
                 <td>
-                    <label for="">NIM</label>
+                    <label for="nim">NIM</label>
                 </td>
                 <td>
-                    <input type="text">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="">Nama Mahasiswa</label>
-                </td>
-                <td>
-                    <input type="text">
+                    <input type="text" name="nim">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="">Jurusan</label>
+                    <label for="nama">Nama Mahasiswa</label>
                 </td>
                 <td>
-                    <input type="text">
+                    <input type="text" name="nama">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="">Alamat </label>
+                    <label for="jurusan">Jurusan</label>
                 </td>
                 <td>
-                    <input type="text">
+                    <input type="text" name="jurusan">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="alamat">Alamat </label>
+                </td>
+                <td>
+                    <input type="text" name="alamat">
                 </td>
             </tr>
             <tr>
@@ -51,18 +62,11 @@
                     <label for=""></label>
                 </td>
                 <td>
-                    <button type="submit">SIMPAN</button>
+                    <button type="submit" name="submit">SIMPAN</button>
                     <button type="reset">UNDO</button>
                 </td>
             </tr>
         </table>
-        <!-- <label for="">Kode</label>
-        <input type="text"><br>
-        <label for="">Nama Dosen</label>
-        <input type="text"><br>
-        <label for="">Alamat Dosen</label>
-        <input type="text"><br> -->
-        <!-- <button type="submit">SIMPAN</button> -->
     </form>
 </body>
 
